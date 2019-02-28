@@ -1,18 +1,41 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <mainContainer :info = "infoUser" />
+    <button>Recargar Datos</button>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Vue from 'vue'
+import mainContainer from './components/mainComponent.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    mainContainer
+  },
+  data() {
+  let infoUser = [];
+
+    this.$axios.get('https://randomuser.me/api/')
+        .then(function (response) {
+        let fullResponse = Object.entries(response);
+        let infoAndResult = fullResponse[0][1];
+        let userDataFull = infoAndResult.results[0]
+        Vue.set(mainContainer.props, 'info', userDataFull)
+        infoUser.push(userDataFull);    
+        //console.log(infoUser);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  return {
+    infoUser
   }
+}
+ 
+  
 }
 </script>
 
