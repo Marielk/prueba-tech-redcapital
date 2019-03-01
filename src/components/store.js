@@ -9,10 +9,10 @@ Vue.use(Vuex)
       userInfo : {
         name: "Mariel Quezada",
         since: "2",
-        profilePicture: "https://randomuser.me/api/portraits/thumb/men/65.jpg",
-        age: 42,
-        location: "vear Hawaii",
-        mail: "rolf.hegdal@example.com"
+        profilePicture: "http://i64.tinypic.com/2dkyelv.jpg",
+        age: 27,
+        location: "Santiago",
+        mail: "mi.mail@example.com"
       }
     },
     mutations: {
@@ -26,14 +26,15 @@ Vue.use(Vuex)
           // aca deberia desglozar el objeto en las propiedades que necesito para asignarlas 
           //console.log(userDataFull);
           let name = `${userDataFull.name.first} ${userDataFull.name.last}`;
+          let nameMayusc = name.toUpperCase();
           let since = userDataFull.registered.age;
-          let profilePicture = userDataFull.picture.thumbnail;
+          let profilePicture = userDataFull.picture.large;
           let age =  userDataFull.dob.age;
           let location = userDataFull.location.city;
           let email = userDataFull.email; 
           //aqui abajo  
           state.userInfo = {
-            name: name,
+            name: nameMayusc,
             since: since,
             profilePicture:profilePicture ,
             age: age,
