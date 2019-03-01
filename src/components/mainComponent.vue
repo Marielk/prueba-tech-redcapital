@@ -1,38 +1,37 @@
 <template>
   <div class="hello">
-    <h1>{{ info }}</h1>
+    <h2>{{ info.userInfo.name}}</h2>
+    <h6>{{ info.userInfo.since  }}</h6>
+    <h6>{{ info.userInfo.profilePicture  }}</h6> 
+    <h6>{{ info.userInfo.age }}</h6> 
+    <h6>{{ info.userInfo.location }}</h6> 
+    <h6>{{ info.userInfo.mail }}</h6>   
+    <button v-on:click="getData">Recargar Datos</button>
   </div>
 </template>
 
 <script>
-
+import store from './store';
 export default {
   name: 'mainContainer',
-  props: ['info'],
-  data() {
-    return{
-      info_test: 'test'
-    }
-  }
-}
+  props: ['info', 'userName'],
 
+ data() {
+  this.$props.info = store.store.state;
+  return {
+  }
+},
+  methods: {
+   getData() {   
+    store.store.commit('refreshData');
+    store.store.getters('updateComponent');
+   }
+  }   
+}
 
 </script>
 
 
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>

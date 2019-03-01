@@ -1,40 +1,27 @@
 <template>
   <div id="app">
-    <mainContainer :info = "infoUser" />
-    <button>Recargar Datos</button>
+    
+    <mainContainer :info = "infoUser" /> 
+   
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
-import mainContainer from './components/mainComponent.vue'
 
+import mainContainer from './components/mainComponent.vue'
+import store from './components/store.js'
 export default {
   name: 'app',
   components: {
     mainContainer
   },
-  data() {
-  let infoUser = [];
 
-    this.$axios.get('https://randomuser.me/api/')
-        .then(function (response) {
-        let fullResponse = Object.entries(response);
-        let infoAndResult = fullResponse[0][1];
-        let userDataFull = infoAndResult.results[0]
-        Vue.set(mainContainer.props, 'info', userDataFull)
-        infoUser.push(userDataFull);    
-        //console.log(infoUser);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
+data() {
   return {
-    infoUser
+    infoUser : store.store.state.userInfo
   }
-}
- 
+},
+
   
 }
 </script>
